@@ -1,0 +1,17 @@
+[
+	{
+		"id": "TC",
+		"name": "Tallow Creek",
+		"region": "North"
+	},
+	{
+		"id": "MB",
+		"name": "Marrow Bay",
+		"region": "Coastal"
+	},
+	{
+		"id": "EP",
+		"name": "Elsin Park",
+		"region": "Central"
+	}
+]

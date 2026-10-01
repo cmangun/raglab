@@ -1,0 +1,24 @@
+[project]
+name = "raglab"
+version = "0.1.0"
+description = "Six retrieval patterns behind one contract, with access control, tamper-evident traces and an evaluation gate."
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = ["numpy>=1.26", "sqlglot>=25", "httpx>=0.27"]
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]>=3.2", "pgvector>=0.3"]
+dev = ["pytest>=8", "pgserver>=0.1.4", "psycopg[binary]>=3.2", "pgvector>=0.3"]
+
+[project.scripts]
+raglab = "raglab.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["raglab*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

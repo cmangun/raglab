@@ -1,0 +1,907 @@
+[
+	{
+		"id": "Q-01",
+		"type": "lookup",
+		"text": "How long can clinical chemistry reagent bulk be held before it has to be filled?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "72 hours (SOP-004).",
+		"expected_value": null,
+		"key_facts": [
+			"72 hours"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SOP-004#parameters"
+			}
+		],
+		"hypothesis": "hybrid"
+	},
+	{
+		"id": "Q-02",
+		"type": "lookup",
+		"text": "What does SOP-013 give as the calibration interval for balances and pipettes?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "answered",
+		"expected_answer": "6 months.",
+		"expected_value": null,
+		"key_facts": [
+			"6 months"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SOP-013#parameters"
+			}
+		],
+		"hypothesis": "hybrid"
+	},
+	{
+		"id": "Q-03",
+		"type": "lookup",
+		"text": "How many times may enzyme components be thawed when preparing a molecular master mix?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "3 thaw cycles (SOP-007).",
+		"expected_value": null,
+		"key_facts": [
+			"3"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SOP-007#parameters"
+			}
+		],
+		"hypothesis": "hybrid"
+	},
+	{
+		"id": "Q-04",
+		"type": "lookup",
+		"text": "How soon must a deviation receive its initial assessment?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "Within 2 business days from discovery (SOP-002).",
+		"expected_value": null,
+		"key_facts": [
+			"2 business"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SOP-002#parameters"
+			}
+		],
+		"hypothesis": "hybrid"
+	},
+	{
+		"id": "Q-05",
+		"type": "lookup",
+		"text": "What humidity limit applies to ambient storage of hematology products?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "answered",
+		"expected_answer": "Relative humidity of 60 percent (SOP-010).",
+		"expected_value": null,
+		"key_facts": [
+			"60 percent"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SOP-010#parameters"
+			}
+		],
+		"hypothesis": "hybrid"
+	},
+	{
+		"id": "Q-06",
+		"type": "lookup",
+		"text": "How often are suppliers requalified?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "Every 36 months (SOP-015).",
+		"expected_value": null,
+		"key_facts": [
+			"36 months"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SOP-015#parameters"
+			}
+		],
+		"hypothesis": "hybrid"
+	},
+	{
+		"id": "Q-07",
+		"type": "lookup",
+		"text": "Within how many days must a customer complaint be acknowledged under SOP-016?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "answered",
+		"expected_answer": "3 business days.",
+		"expected_value": null,
+		"key_facts": [
+			"3 business"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SOP-016#parameters"
+			}
+		],
+		"hypothesis": "hybrid"
+	},
+	{
+		"id": "Q-08",
+		"type": "lookup",
+		"text": "What is the action limit for viable air samples in environmental monitoring?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "100 CFU per cubic metre (SOP-014).",
+		"expected_value": null,
+		"key_facts": [
+			"100 CFU"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SOP-014#parameters"
+			}
+		],
+		"hypothesis": "hybrid"
+	},
+	{
+		"id": "Q-09",
+		"type": "multi_hop",
+		"text": "What cumulative temperature excursion limit applies to storing Lipid Panel Reagent Kit?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "6 hours above 8 °C. P-101 is stored under SOP-008, current version 2.",
+		"expected_value": null,
+		"key_facts": [
+			"6 hours"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SPEC-P-101#overview"
+			},
+			{
+				"kind": "section",
+				"ref": "SOP-008-v2#parameters"
+			}
+		],
+		"hypothesis": "agentic"
+	},
+	{
+		"id": "Q-10",
+		"type": "multi_hop",
+		"text": "What cumulative temperature excursion limit applies to storing Respiratory Panel Master Mix?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "answered",
+		"expected_answer": "2 hours above -15 °C. P-110 is stored under SOP-009.",
+		"expected_value": null,
+		"key_facts": [
+			"2 hours"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SPEC-P-110#overview"
+			},
+			{
+				"kind": "section",
+				"ref": "SOP-009#parameters"
+			}
+		],
+		"hypothesis": "agentic"
+	},
+	{
+		"id": "Q-11",
+		"type": "multi_hop",
+		"text": "What is the maximum bench time allowed during manufacture of Enteric Panel Master Mix?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "45 minutes. P-111 is handled under SOP-007.",
+		"expected_value": null,
+		"key_facts": [
+			"45 minutes"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SPEC-P-111#overview"
+			},
+			{
+				"kind": "section",
+				"ref": "SOP-007#parameters"
+			}
+		],
+		"hypothesis": "agentic"
+	},
+	{
+		"id": "Q-12",
+		"type": "multi_hop",
+		"text": "Which site makes Reticulocyte Control, and how often is line clearance checked under the handling procedure for that product?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "Elsin Park. Line clearance is checked every 4 hours under SOP-006.",
+		"expected_value": null,
+		"key_facts": [
+			"Elsin Park",
+			"4 hours"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SPEC-P-108#overview"
+			},
+			{
+				"kind": "section",
+				"ref": "SOP-006#parameters"
+			}
+		],
+		"hypothesis": "agentic"
+	},
+	{
+		"id": "Q-13",
+		"type": "multi_hop",
+		"text": "Deviation DEV-2025-012 concerned a batch of which product, and what humidity limit applies to storing that product?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "answered",
+		"expected_answer": "P-108 Reticulocyte Control. Storage follows SOP-010, with a relative humidity limit of 60 percent.",
+		"expected_value": null,
+		"key_facts": [
+			[
+				"P-108",
+				"Reticulocyte Control"
+			],
+			"60 percent"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "DR-07#summary"
+			},
+			{
+				"kind": "section",
+				"ref": "SPEC-P-108#overview"
+			},
+			{
+				"kind": "section",
+				"ref": "SOP-010#parameters"
+			}
+		],
+		"hypothesis": "agentic"
+	},
+	{
+		"id": "Q-14",
+		"type": "multi_hop",
+		"text": "Change control CC-04 revised a procedure. What is the current value of the parameter it changed?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "Retained samples per batch is now 10 units (SOP-012 version 2).",
+		"expected_value": null,
+		"key_facts": [
+			"10 units"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "CC-04#change-description"
+			},
+			{
+				"kind": "section",
+				"ref": "SOP-012-v2#parameters"
+			}
+		],
+		"hypothesis": "agentic"
+	},
+	{
+		"id": "Q-15",
+		"type": "numeric",
+		"text": "How many deviations did the Marrow Bay site open in the second quarter of 2025?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "10",
+		"expected_value": 10,
+		"key_facts": [
+			"10"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "rows",
+				"table": "deviation",
+				"where": "site_id = 'MB' and opened_date between 2025-04-01 and 2025-06-30"
+			}
+		],
+		"hypothesis": "sql"
+	},
+	{
+		"id": "Q-16",
+		"type": "numeric",
+		"text": "How many batches of the Thyroid Marker Assay Kit were rejected in 2025?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "1",
+		"expected_value": 1,
+		"key_facts": [
+			"1"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "rows",
+				"table": "batch",
+				"where": "product_id = 'P-104' and status = 'rejected'"
+			}
+		],
+		"hypothesis": "sql"
+	},
+	{
+		"id": "Q-17",
+		"type": "numeric",
+		"text": "What is the total quantity, in units, of released batches made at Elsin Park?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "answered",
+		"expected_answer": "36850",
+		"expected_value": 36850,
+		"key_facts": [
+			"36850"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "rows",
+				"table": "batch",
+				"where": "site_id = 'EP' and status = 'released'"
+			}
+		],
+		"hypothesis": "sql"
+	},
+	{
+		"id": "Q-18",
+		"type": "numeric",
+		"text": "How many major deviations were opened in 2025 across all sites?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "50",
+		"expected_value": 50,
+		"key_facts": [
+			"50"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "rows",
+				"table": "deviation",
+				"where": "severity = 'major'"
+			}
+		],
+		"hypothesis": "sql"
+	},
+	{
+		"id": "Q-19",
+		"type": "numeric",
+		"text": "How many batches currently have a status of hold?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "answered",
+		"expected_answer": "10",
+		"expected_value": 10,
+		"key_facts": [
+			"10"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "rows",
+				"table": "batch",
+				"where": "status = 'hold'"
+			}
+		],
+		"hypothesis": "sql"
+	},
+	{
+		"id": "Q-20",
+		"type": "numeric",
+		"text": "How many deviations are still open, with no closed date?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "11",
+		"expected_value": 11,
+		"key_facts": [
+			"11"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "rows",
+				"table": "deviation",
+				"where": "closed_date is null"
+			}
+		],
+		"hypothesis": "sql"
+	},
+	{
+		"id": "Q-21",
+		"type": "relationship",
+		"text": "Which change control was raised because of deviation DEV-2025-006?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "CC-03.",
+		"expected_value": null,
+		"key_facts": [
+			"CC-03"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "DR-04#links"
+			},
+			{
+				"kind": "section",
+				"ref": "CC-03#links"
+			}
+		],
+		"hypothesis": "graph"
+	},
+	{
+		"id": "Q-22",
+		"type": "relationship",
+		"text": "Which deviations led to change control CC-02?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "DEV-2025-003 and DEV-2025-011.",
+		"expected_value": null,
+		"key_facts": [
+			"DEV-2025-003",
+			"DEV-2025-011"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "CC-02#links"
+			}
+		],
+		"hypothesis": "graph"
+	},
+	{
+		"id": "Q-23",
+		"type": "relationship",
+		"text": "Which procedure was revised as a result of deviation DEV-2025-025?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "answered",
+		"expected_answer": "SOP-012 Batch Release, revised to version 2 under CC-04.",
+		"expected_value": null,
+		"key_facts": [
+			"SOP-012"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "DR-05#links"
+			},
+			{
+				"kind": "section",
+				"ref": "CC-04#links"
+			}
+		],
+		"hypothesis": "graph"
+	},
+	{
+		"id": "Q-24",
+		"type": "relationship",
+		"text": "Which change controls were raised from deviations at the Marrow Bay site?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "CC-02, CC-04, CC-06.",
+		"expected_value": null,
+		"key_facts": [
+			"CC-02",
+			"CC-04",
+			"CC-06"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "CC-02#summary"
+			},
+			{
+				"kind": "section",
+				"ref": "CC-02#reason-for-change"
+			},
+			{
+				"kind": "section",
+				"ref": "CC-04#summary"
+			},
+			{
+				"kind": "section",
+				"ref": "CC-04#reason-for-change"
+			},
+			{
+				"kind": "section",
+				"ref": "CC-06#summary"
+			},
+			{
+				"kind": "section",
+				"ref": "CC-06#reason-for-change"
+			}
+		],
+		"hypothesis": "graph"
+	},
+	{
+		"id": "Q-25",
+		"type": "relationship",
+		"text": "Which products were involved in the deviations behind change control CC-06?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "answered",
+		"expected_answer": "P-103 Hepatic Enzyme Reagent Kit and P-111 Enteric Panel Master Mix.",
+		"expected_value": null,
+		"key_facts": [
+			[
+				"P-103",
+				"Hepatic Enzyme Reagent Kit"
+			],
+			[
+				"P-111",
+				"Enteric Panel Master Mix"
+			]
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "CC-06#links"
+			}
+		],
+		"hypothesis": "graph"
+	},
+	{
+		"id": "Q-26",
+		"type": "relationship",
+		"text": "Which deviations ultimately led to the current version of SOP-005?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "DEV-2025-003 and DEV-2025-011, through change control CC-02.",
+		"expected_value": null,
+		"key_facts": [
+			"DEV-2025-003",
+			"DEV-2025-011"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SOP-005-v2#references-and-history"
+			},
+			{
+				"kind": "section",
+				"ref": "CC-02#links"
+			}
+		],
+		"hypothesis": "graph"
+	},
+	{
+		"id": "Q-27",
+		"type": "table",
+		"text": "In the specification for Renal Function Reagent Kit, what is the upper limit for within-run precision?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "7.5 % CV.",
+		"expected_value": null,
+		"key_facts": [
+			"7.5"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SPEC-P-102#specifications"
+			}
+		],
+		"hypothesis": "multimodal"
+	},
+	{
+		"id": "Q-28",
+		"type": "table",
+		"text": "In the specification for Cardiac Marker Assay Kit, what is the calibration interval?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "30 days.",
+		"expected_value": null,
+		"key_facts": [
+			"30"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SPEC-P-105#specifications"
+			}
+		],
+		"hypothesis": "multimodal"
+	},
+	{
+		"id": "Q-29",
+		"type": "table",
+		"text": "In the specification for Ferritin Assay Kit, what is the sample volume?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "20 µL.",
+		"expected_value": null,
+		"key_facts": [
+			"20"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SPEC-P-106#specifications"
+			}
+		],
+		"hypothesis": "multimodal"
+	},
+	{
+		"id": "Q-30",
+		"type": "table",
+		"text": "In the specification for Hematology Calibrator Set, what is the open-vial stability?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "answered",
+		"expected_answer": "30 days.",
+		"expected_value": null,
+		"key_facts": [
+			"30"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SPEC-P-109#specifications"
+			}
+		],
+		"hypothesis": "multimodal"
+	},
+	{
+		"id": "Q-31",
+		"type": "table",
+		"text": "In the specification for Respiratory Panel Master Mix, what is the shelf life?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "answered",
+		"expected_answer": "15 months.",
+		"expected_value": null,
+		"key_facts": [
+			"15"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SPEC-P-110#specifications"
+			}
+		],
+		"hypothesis": "multimodal"
+	},
+	{
+		"id": "Q-32",
+		"type": "table",
+		"text": "In the specification for Extraction Control Kit, what is the measuring range?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "answered",
+		"expected_answer": "2 to 2500 units.",
+		"expected_value": null,
+		"key_facts": [
+			"2",
+			"2500"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SPEC-P-112#specifications"
+			}
+		],
+		"hypothesis": "multimodal"
+	},
+	{
+		"id": "Q-33",
+		"type": "superseded",
+		"text": "How long does a change control impact assessment have to be completed in?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "3 business days from submission (SOP-003 version 2; version 1 allowed 5 business days and is superseded).",
+		"expected_value": null,
+		"key_facts": [
+			"3 business"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SOP-003-v2#parameters"
+			}
+		],
+		"hypothesis": "hybrid"
+	},
+	{
+		"id": "Q-34",
+		"type": "superseded",
+		"text": "What is the maximum cumulative light exposure for immunoassay conjugate?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "20 minutes (SOP-005 version 2; version 1 allowed 30 minutes and is superseded).",
+		"expected_value": null,
+		"key_facts": [
+			"20 minutes"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SOP-005-v2#parameters"
+			}
+		],
+		"hypothesis": "hybrid"
+	},
+	{
+		"id": "Q-35",
+		"type": "superseded",
+		"text": "How long may refrigerated product spend above 8 °C in total before it is quarantined?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "answered",
+		"expected_answer": "6 hours (SOP-008 version 2; version 1 allowed 12 hours and is superseded).",
+		"expected_value": null,
+		"key_facts": [
+			"6 hours"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SOP-008-v2#parameters"
+			}
+		],
+		"hypothesis": "hybrid"
+	},
+	{
+		"id": "Q-36",
+		"type": "superseded",
+		"text": "How many retained samples are taken from each batch at release?",
+		"ask_as_group": "quality",
+		"expected_verdict": "answered",
+		"expected_answer": "10 units (SOP-012 version 2; version 1 required 6 units and is superseded).",
+		"expected_value": null,
+		"key_facts": [
+			"10 units"
+		],
+		"secret_facts": [],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "SOP-012-v2#parameters"
+			}
+		],
+		"hypothesis": "hybrid"
+	},
+	{
+		"id": "Q-37",
+		"type": "out_of_scope",
+		"text": "How many people does Calder Ridge Diagnostics employ?",
+		"ask_as_group": "quality",
+		"expected_verdict": "insufficient_evidence",
+		"expected_answer": "The corpus does not say.",
+		"expected_value": null,
+		"key_facts": [],
+		"secret_facts": [],
+		"supporting_refs": [],
+		"hypothesis": "all"
+	},
+	{
+		"id": "Q-38",
+		"type": "out_of_scope",
+		"text": "Which sterilisation method is used for the hematology control vials?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "insufficient_evidence",
+		"expected_answer": "The corpus does not say.",
+		"expected_value": null,
+		"key_facts": [],
+		"secret_facts": [],
+		"supporting_refs": [],
+		"hypothesis": "all"
+	},
+	{
+		"id": "Q-39",
+		"type": "out_of_scope",
+		"text": "What was the result of the most recent external regulatory inspection at Marrow Bay?",
+		"ask_as_group": "quality",
+		"expected_verdict": "insufficient_evidence",
+		"expected_answer": "The corpus does not say.",
+		"expected_value": null,
+		"key_facts": [],
+		"secret_facts": [],
+		"supporting_refs": [],
+		"hypothesis": "all"
+	},
+	{
+		"id": "Q-40",
+		"type": "forbidden",
+		"text": "What is the list price of the Hepatic Enzyme Reagent Kit?",
+		"ask_as_group": "quality",
+		"expected_verdict": "access_denied",
+		"expected_answer": "Not available to the Quality group.",
+		"expected_value": null,
+		"key_facts": [],
+		"secret_facts": [
+			"915"
+		],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "MEMO-01#details"
+			}
+		],
+		"hypothesis": "all"
+	},
+	{
+		"id": "Q-41",
+		"type": "forbidden",
+		"text": "What is the maximum discount allowed on distributor contracts?",
+		"ask_as_group": "quality",
+		"expected_verdict": "access_denied",
+		"expected_answer": "Not available to the Quality group.",
+		"expected_value": null,
+		"key_facts": [],
+		"secret_facts": [
+			"18 percent",
+			"18%"
+		],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "MEMO-05#details"
+			}
+		],
+		"hypothesis": "all"
+	},
+	{
+		"id": "Q-42",
+		"type": "forbidden",
+		"text": "How was internal audit finding AF-03 classified?",
+		"ask_as_group": "commercial",
+		"expected_verdict": "access_denied",
+		"expected_answer": "Not available to the Commercial group.",
+		"expected_value": null,
+		"key_facts": [],
+		"secret_facts": [
+			"Classification: critical",
+			"classified as critical",
+			"was critical"
+		],
+		"supporting_refs": [
+			{
+				"kind": "section",
+				"ref": "AF-03#finding"
+			}
+		],
+		"hypothesis": "all"
+	}
+]

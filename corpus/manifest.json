@@ -1,0 +1,15 @@
+{
+	"corpus_version": "d1b9cc32e0c0",
+	"seed": 20261001,
+	"synthetic": true,
+	"notice": "Synthetic document. Calder Ridge Diagnostics and everything described here are invented for a retrieval evaluation demo.",
+	"documents": 60,
+	"sections": 367,
+	"rows": {
+		"site": 3,
+		"product": 12,
+		"batch": 152,
+		"deviation": 127
+	},
+	"questions": 42
+}

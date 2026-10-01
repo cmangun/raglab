@@ -1,0 +1,1218 @@
+[
+	{
+		"id": "B-25-0001",
+		"product_id": "P-101",
+		"site_id": "TC",
+		"mfg_date": "2025-01-22",
+		"quantity_units": 2000,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0002",
+		"product_id": "P-101",
+		"site_id": "TC",
+		"mfg_date": "2025-01-21",
+		"quantity_units": 2000,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0003",
+		"product_id": "P-101",
+		"site_id": "TC",
+		"mfg_date": "2025-10-09",
+		"quantity_units": 1150,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0004",
+		"product_id": "P-101",
+		"site_id": "TC",
+		"mfg_date": "2025-04-30",
+		"quantity_units": 200,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0005",
+		"product_id": "P-101",
+		"site_id": "TC",
+		"mfg_date": "2025-06-27",
+		"quantity_units": 750,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0006",
+		"product_id": "P-101",
+		"site_id": "TC",
+		"mfg_date": "2025-02-03",
+		"quantity_units": 1450,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0007",
+		"product_id": "P-101",
+		"site_id": "TC",
+		"mfg_date": "2025-09-08",
+		"quantity_units": 1100,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0008",
+		"product_id": "P-101",
+		"site_id": "TC",
+		"mfg_date": "2025-09-04",
+		"quantity_units": 1150,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0009",
+		"product_id": "P-101",
+		"site_id": "TC",
+		"mfg_date": "2025-10-29",
+		"quantity_units": 550,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0010",
+		"product_id": "P-101",
+		"site_id": "TC",
+		"mfg_date": "2025-10-27",
+		"quantity_units": 800,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0011",
+		"product_id": "P-101",
+		"site_id": "TC",
+		"mfg_date": "2025-01-09",
+		"quantity_units": 1600,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0012",
+		"product_id": "P-101",
+		"site_id": "TC",
+		"mfg_date": "2025-01-15",
+		"quantity_units": 950,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0013",
+		"product_id": "P-102",
+		"site_id": "TC",
+		"mfg_date": "2025-02-13",
+		"quantity_units": 1400,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0014",
+		"product_id": "P-102",
+		"site_id": "TC",
+		"mfg_date": "2025-11-23",
+		"quantity_units": 1150,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0015",
+		"product_id": "P-102",
+		"site_id": "TC",
+		"mfg_date": "2025-02-28",
+		"quantity_units": 600,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0016",
+		"product_id": "P-102",
+		"site_id": "TC",
+		"mfg_date": "2025-10-09",
+		"quantity_units": 1700,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0017",
+		"product_id": "P-102",
+		"site_id": "TC",
+		"mfg_date": "2025-10-03",
+		"quantity_units": 800,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0018",
+		"product_id": "P-102",
+		"site_id": "TC",
+		"mfg_date": "2025-12-03",
+		"quantity_units": 1600,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0019",
+		"product_id": "P-102",
+		"site_id": "TC",
+		"mfg_date": "2025-11-07",
+		"quantity_units": 1200,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0020",
+		"product_id": "P-102",
+		"site_id": "TC",
+		"mfg_date": "2025-05-03",
+		"quantity_units": 250,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0021",
+		"product_id": "P-102",
+		"site_id": "TC",
+		"mfg_date": "2025-03-05",
+		"quantity_units": 700,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0022",
+		"product_id": "P-102",
+		"site_id": "TC",
+		"mfg_date": "2025-05-06",
+		"quantity_units": 1600,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0023",
+		"product_id": "P-102",
+		"site_id": "TC",
+		"mfg_date": "2025-07-11",
+		"quantity_units": 800,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0024",
+		"product_id": "P-102",
+		"site_id": "TC",
+		"mfg_date": "2025-01-14",
+		"quantity_units": 1700,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0025",
+		"product_id": "P-102",
+		"site_id": "TC",
+		"mfg_date": "2025-12-04",
+		"quantity_units": 1200,
+		"status": "hold"
+	},
+	{
+		"id": "B-25-0026",
+		"product_id": "P-103",
+		"site_id": "TC",
+		"mfg_date": "2025-07-06",
+		"quantity_units": 950,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0027",
+		"product_id": "P-103",
+		"site_id": "TC",
+		"mfg_date": "2025-08-25",
+		"quantity_units": 500,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0028",
+		"product_id": "P-103",
+		"site_id": "TC",
+		"mfg_date": "2025-03-03",
+		"quantity_units": 850,
+		"status": "hold"
+	},
+	{
+		"id": "B-25-0029",
+		"product_id": "P-103",
+		"site_id": "TC",
+		"mfg_date": "2025-11-06",
+		"quantity_units": 800,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0030",
+		"product_id": "P-103",
+		"site_id": "TC",
+		"mfg_date": "2025-07-16",
+		"quantity_units": 300,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0031",
+		"product_id": "P-103",
+		"site_id": "TC",
+		"mfg_date": "2025-07-31",
+		"quantity_units": 1400,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0032",
+		"product_id": "P-103",
+		"site_id": "TC",
+		"mfg_date": "2025-01-09",
+		"quantity_units": 450,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0033",
+		"product_id": "P-103",
+		"site_id": "TC",
+		"mfg_date": "2025-03-28",
+		"quantity_units": 1650,
+		"status": "hold"
+	},
+	{
+		"id": "B-25-0034",
+		"product_id": "P-103",
+		"site_id": "TC",
+		"mfg_date": "2025-11-14",
+		"quantity_units": 200,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0035",
+		"product_id": "P-103",
+		"site_id": "TC",
+		"mfg_date": "2025-01-31",
+		"quantity_units": 200,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0036",
+		"product_id": "P-103",
+		"site_id": "TC",
+		"mfg_date": "2025-11-03",
+		"quantity_units": 2000,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0037",
+		"product_id": "P-103",
+		"site_id": "TC",
+		"mfg_date": "2025-04-18",
+		"quantity_units": 1750,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0038",
+		"product_id": "P-103",
+		"site_id": "TC",
+		"mfg_date": "2025-08-11",
+		"quantity_units": 200,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0039",
+		"product_id": "P-103",
+		"site_id": "TC",
+		"mfg_date": "2025-05-22",
+		"quantity_units": 1500,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0040",
+		"product_id": "P-104",
+		"site_id": "MB",
+		"mfg_date": "2025-03-29",
+		"quantity_units": 550,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0041",
+		"product_id": "P-104",
+		"site_id": "MB",
+		"mfg_date": "2025-03-29",
+		"quantity_units": 1950,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0042",
+		"product_id": "P-104",
+		"site_id": "MB",
+		"mfg_date": "2025-02-23",
+		"quantity_units": 300,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0043",
+		"product_id": "P-104",
+		"site_id": "MB",
+		"mfg_date": "2025-11-01",
+		"quantity_units": 1800,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0044",
+		"product_id": "P-104",
+		"site_id": "MB",
+		"mfg_date": "2025-06-18",
+		"quantity_units": 1750,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0045",
+		"product_id": "P-104",
+		"site_id": "MB",
+		"mfg_date": "2025-08-03",
+		"quantity_units": 1550,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0046",
+		"product_id": "P-104",
+		"site_id": "MB",
+		"mfg_date": "2025-01-09",
+		"quantity_units": 1600,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0047",
+		"product_id": "P-104",
+		"site_id": "MB",
+		"mfg_date": "2025-03-02",
+		"quantity_units": 1400,
+		"status": "hold"
+	},
+	{
+		"id": "B-25-0048",
+		"product_id": "P-104",
+		"site_id": "MB",
+		"mfg_date": "2025-04-15",
+		"quantity_units": 300,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0049",
+		"product_id": "P-104",
+		"site_id": "MB",
+		"mfg_date": "2025-09-23",
+		"quantity_units": 1750,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0050",
+		"product_id": "P-104",
+		"site_id": "MB",
+		"mfg_date": "2025-06-25",
+		"quantity_units": 1700,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0051",
+		"product_id": "P-104",
+		"site_id": "MB",
+		"mfg_date": "2025-10-19",
+		"quantity_units": 1050,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0052",
+		"product_id": "P-104",
+		"site_id": "MB",
+		"mfg_date": "2025-10-28",
+		"quantity_units": 900,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0053",
+		"product_id": "P-105",
+		"site_id": "MB",
+		"mfg_date": "2025-11-30",
+		"quantity_units": 1200,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0054",
+		"product_id": "P-105",
+		"site_id": "MB",
+		"mfg_date": "2025-01-23",
+		"quantity_units": 250,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0055",
+		"product_id": "P-105",
+		"site_id": "MB",
+		"mfg_date": "2025-08-26",
+		"quantity_units": 650,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0056",
+		"product_id": "P-105",
+		"site_id": "MB",
+		"mfg_date": "2025-01-15",
+		"quantity_units": 550,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0057",
+		"product_id": "P-105",
+		"site_id": "MB",
+		"mfg_date": "2025-10-20",
+		"quantity_units": 1900,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0058",
+		"product_id": "P-105",
+		"site_id": "MB",
+		"mfg_date": "2025-08-04",
+		"quantity_units": 1950,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0059",
+		"product_id": "P-105",
+		"site_id": "MB",
+		"mfg_date": "2025-01-17",
+		"quantity_units": 800,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0060",
+		"product_id": "P-105",
+		"site_id": "MB",
+		"mfg_date": "2025-05-18",
+		"quantity_units": 1700,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0061",
+		"product_id": "P-105",
+		"site_id": "MB",
+		"mfg_date": "2025-07-02",
+		"quantity_units": 250,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0062",
+		"product_id": "P-105",
+		"site_id": "MB",
+		"mfg_date": "2025-07-13",
+		"quantity_units": 850,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0063",
+		"product_id": "P-105",
+		"site_id": "MB",
+		"mfg_date": "2025-07-21",
+		"quantity_units": 950,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0064",
+		"product_id": "P-106",
+		"site_id": "MB",
+		"mfg_date": "2025-09-26",
+		"quantity_units": 400,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0065",
+		"product_id": "P-106",
+		"site_id": "MB",
+		"mfg_date": "2025-09-29",
+		"quantity_units": 600,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0066",
+		"product_id": "P-106",
+		"site_id": "MB",
+		"mfg_date": "2025-06-23",
+		"quantity_units": 1750,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0067",
+		"product_id": "P-106",
+		"site_id": "MB",
+		"mfg_date": "2025-12-05",
+		"quantity_units": 900,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0068",
+		"product_id": "P-106",
+		"site_id": "MB",
+		"mfg_date": "2025-07-18",
+		"quantity_units": 450,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0069",
+		"product_id": "P-106",
+		"site_id": "MB",
+		"mfg_date": "2025-11-26",
+		"quantity_units": 500,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0070",
+		"product_id": "P-106",
+		"site_id": "MB",
+		"mfg_date": "2025-06-27",
+		"quantity_units": 1050,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0071",
+		"product_id": "P-106",
+		"site_id": "MB",
+		"mfg_date": "2025-01-06",
+		"quantity_units": 1000,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0072",
+		"product_id": "P-106",
+		"site_id": "MB",
+		"mfg_date": "2025-06-26",
+		"quantity_units": 1550,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0073",
+		"product_id": "P-106",
+		"site_id": "MB",
+		"mfg_date": "2025-03-10",
+		"quantity_units": 1100,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0074",
+		"product_id": "P-106",
+		"site_id": "MB",
+		"mfg_date": "2025-01-27",
+		"quantity_units": 1400,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0075",
+		"product_id": "P-107",
+		"site_id": "EP",
+		"mfg_date": "2025-09-13",
+		"quantity_units": 1000,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0076",
+		"product_id": "P-107",
+		"site_id": "EP",
+		"mfg_date": "2025-05-09",
+		"quantity_units": 600,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0077",
+		"product_id": "P-107",
+		"site_id": "EP",
+		"mfg_date": "2025-01-22",
+		"quantity_units": 450,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0078",
+		"product_id": "P-107",
+		"site_id": "EP",
+		"mfg_date": "2025-07-30",
+		"quantity_units": 1850,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0079",
+		"product_id": "P-107",
+		"site_id": "EP",
+		"mfg_date": "2025-02-08",
+		"quantity_units": 1200,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0080",
+		"product_id": "P-107",
+		"site_id": "EP",
+		"mfg_date": "2025-04-29",
+		"quantity_units": 900,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0081",
+		"product_id": "P-107",
+		"site_id": "EP",
+		"mfg_date": "2025-07-25",
+		"quantity_units": 1650,
+		"status": "hold"
+	},
+	{
+		"id": "B-25-0082",
+		"product_id": "P-107",
+		"site_id": "EP",
+		"mfg_date": "2025-10-13",
+		"quantity_units": 350,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0083",
+		"product_id": "P-107",
+		"site_id": "EP",
+		"mfg_date": "2025-04-17",
+		"quantity_units": 450,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0084",
+		"product_id": "P-107",
+		"site_id": "EP",
+		"mfg_date": "2025-07-07",
+		"quantity_units": 1600,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0085",
+		"product_id": "P-107",
+		"site_id": "EP",
+		"mfg_date": "2025-01-20",
+		"quantity_units": 1200,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0086",
+		"product_id": "P-107",
+		"site_id": "EP",
+		"mfg_date": "2025-10-31",
+		"quantity_units": 1800,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0087",
+		"product_id": "P-107",
+		"site_id": "EP",
+		"mfg_date": "2025-05-17",
+		"quantity_units": 1800,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0088",
+		"product_id": "P-108",
+		"site_id": "EP",
+		"mfg_date": "2025-10-08",
+		"quantity_units": 450,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0089",
+		"product_id": "P-108",
+		"site_id": "EP",
+		"mfg_date": "2025-01-12",
+		"quantity_units": 1550,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0090",
+		"product_id": "P-108",
+		"site_id": "EP",
+		"mfg_date": "2025-01-20",
+		"quantity_units": 500,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0091",
+		"product_id": "P-108",
+		"site_id": "EP",
+		"mfg_date": "2025-10-15",
+		"quantity_units": 1400,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0092",
+		"product_id": "P-108",
+		"site_id": "EP",
+		"mfg_date": "2025-07-25",
+		"quantity_units": 600,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0093",
+		"product_id": "P-108",
+		"site_id": "EP",
+		"mfg_date": "2025-10-24",
+		"quantity_units": 350,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0094",
+		"product_id": "P-108",
+		"site_id": "EP",
+		"mfg_date": "2025-06-28",
+		"quantity_units": 1050,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0095",
+		"product_id": "P-108",
+		"site_id": "EP",
+		"mfg_date": "2025-03-23",
+		"quantity_units": 1200,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0096",
+		"product_id": "P-108",
+		"site_id": "EP",
+		"mfg_date": "2025-06-16",
+		"quantity_units": 1950,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0097",
+		"product_id": "P-108",
+		"site_id": "EP",
+		"mfg_date": "2025-03-08",
+		"quantity_units": 1800,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0098",
+		"product_id": "P-108",
+		"site_id": "EP",
+		"mfg_date": "2025-02-09",
+		"quantity_units": 1750,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0099",
+		"product_id": "P-108",
+		"site_id": "EP",
+		"mfg_date": "2025-02-20",
+		"quantity_units": 1100,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0100",
+		"product_id": "P-108",
+		"site_id": "EP",
+		"mfg_date": "2025-04-15",
+		"quantity_units": 350,
+		"status": "hold"
+	},
+	{
+		"id": "B-25-0101",
+		"product_id": "P-108",
+		"site_id": "EP",
+		"mfg_date": "2025-08-28",
+		"quantity_units": 850,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0102",
+		"product_id": "P-109",
+		"site_id": "EP",
+		"mfg_date": "2025-09-22",
+		"quantity_units": 900,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0103",
+		"product_id": "P-109",
+		"site_id": "EP",
+		"mfg_date": "2025-06-16",
+		"quantity_units": 1650,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0104",
+		"product_id": "P-109",
+		"site_id": "EP",
+		"mfg_date": "2025-04-08",
+		"quantity_units": 550,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0105",
+		"product_id": "P-109",
+		"site_id": "EP",
+		"mfg_date": "2025-08-22",
+		"quantity_units": 1400,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0106",
+		"product_id": "P-109",
+		"site_id": "EP",
+		"mfg_date": "2025-07-27",
+		"quantity_units": 600,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0107",
+		"product_id": "P-109",
+		"site_id": "EP",
+		"mfg_date": "2025-03-19",
+		"quantity_units": 450,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0108",
+		"product_id": "P-109",
+		"site_id": "EP",
+		"mfg_date": "2025-01-31",
+		"quantity_units": 750,
+		"status": "hold"
+	},
+	{
+		"id": "B-25-0109",
+		"product_id": "P-109",
+		"site_id": "EP",
+		"mfg_date": "2025-03-29",
+		"quantity_units": 1150,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0110",
+		"product_id": "P-109",
+		"site_id": "EP",
+		"mfg_date": "2025-07-25",
+		"quantity_units": 1050,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0111",
+		"product_id": "P-109",
+		"site_id": "EP",
+		"mfg_date": "2025-10-23",
+		"quantity_units": 950,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0112",
+		"product_id": "P-109",
+		"site_id": "EP",
+		"mfg_date": "2025-01-10",
+		"quantity_units": 1800,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0113",
+		"product_id": "P-109",
+		"site_id": "EP",
+		"mfg_date": "2025-09-09",
+		"quantity_units": 1050,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0114",
+		"product_id": "P-109",
+		"site_id": "EP",
+		"mfg_date": "2025-09-19",
+		"quantity_units": 700,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0115",
+		"product_id": "P-110",
+		"site_id": "MB",
+		"mfg_date": "2025-11-21",
+		"quantity_units": 1050,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0116",
+		"product_id": "P-110",
+		"site_id": "MB",
+		"mfg_date": "2025-03-24",
+		"quantity_units": 1950,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0117",
+		"product_id": "P-110",
+		"site_id": "MB",
+		"mfg_date": "2025-10-27",
+		"quantity_units": 500,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0118",
+		"product_id": "P-110",
+		"site_id": "MB",
+		"mfg_date": "2025-06-25",
+		"quantity_units": 1750,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0119",
+		"product_id": "P-110",
+		"site_id": "MB",
+		"mfg_date": "2025-06-03",
+		"quantity_units": 1350,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0120",
+		"product_id": "P-110",
+		"site_id": "MB",
+		"mfg_date": "2025-04-17",
+		"quantity_units": 300,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0121",
+		"product_id": "P-110",
+		"site_id": "MB",
+		"mfg_date": "2025-02-17",
+		"quantity_units": 750,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0122",
+		"product_id": "P-110",
+		"site_id": "MB",
+		"mfg_date": "2025-12-07",
+		"quantity_units": 200,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0123",
+		"product_id": "P-110",
+		"site_id": "MB",
+		"mfg_date": "2025-06-14",
+		"quantity_units": 1000,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0124",
+		"product_id": "P-110",
+		"site_id": "MB",
+		"mfg_date": "2025-07-23",
+		"quantity_units": 200,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0125",
+		"product_id": "P-110",
+		"site_id": "MB",
+		"mfg_date": "2025-01-29",
+		"quantity_units": 400,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0126",
+		"product_id": "P-110",
+		"site_id": "MB",
+		"mfg_date": "2025-11-28",
+		"quantity_units": 1350,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0127",
+		"product_id": "P-110",
+		"site_id": "MB",
+		"mfg_date": "2025-10-03",
+		"quantity_units": 200,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0128",
+		"product_id": "P-111",
+		"site_id": "MB",
+		"mfg_date": "2025-01-22",
+		"quantity_units": 1200,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0129",
+		"product_id": "P-111",
+		"site_id": "MB",
+		"mfg_date": "2025-04-23",
+		"quantity_units": 1650,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0130",
+		"product_id": "P-111",
+		"site_id": "MB",
+		"mfg_date": "2025-04-01",
+		"quantity_units": 1450,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0131",
+		"product_id": "P-111",
+		"site_id": "MB",
+		"mfg_date": "2025-07-11",
+		"quantity_units": 500,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0132",
+		"product_id": "P-111",
+		"site_id": "MB",
+		"mfg_date": "2025-08-02",
+		"quantity_units": 200,
+		"status": "hold"
+	},
+	{
+		"id": "B-25-0133",
+		"product_id": "P-111",
+		"site_id": "MB",
+		"mfg_date": "2025-04-22",
+		"quantity_units": 600,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0134",
+		"product_id": "P-111",
+		"site_id": "MB",
+		"mfg_date": "2025-04-29",
+		"quantity_units": 1600,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0135",
+		"product_id": "P-111",
+		"site_id": "MB",
+		"mfg_date": "2025-10-02",
+		"quantity_units": 550,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0136",
+		"product_id": "P-111",
+		"site_id": "MB",
+		"mfg_date": "2025-08-02",
+		"quantity_units": 1100,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0137",
+		"product_id": "P-111",
+		"site_id": "MB",
+		"mfg_date": "2025-11-07",
+		"quantity_units": 500,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0138",
+		"product_id": "P-111",
+		"site_id": "MB",
+		"mfg_date": "2025-11-15",
+		"quantity_units": 800,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0139",
+		"product_id": "P-111",
+		"site_id": "MB",
+		"mfg_date": "2025-05-01",
+		"quantity_units": 1950,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0140",
+		"product_id": "P-111",
+		"site_id": "MB",
+		"mfg_date": "2025-02-23",
+		"quantity_units": 1300,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0141",
+		"product_id": "P-112",
+		"site_id": "MB",
+		"mfg_date": "2025-04-26",
+		"quantity_units": 1500,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0142",
+		"product_id": "P-112",
+		"site_id": "MB",
+		"mfg_date": "2025-01-03",
+		"quantity_units": 1100,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0143",
+		"product_id": "P-112",
+		"site_id": "MB",
+		"mfg_date": "2025-01-25",
+		"quantity_units": 1200,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0144",
+		"product_id": "P-112",
+		"site_id": "MB",
+		"mfg_date": "2025-06-24",
+		"quantity_units": 1900,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0145",
+		"product_id": "P-112",
+		"site_id": "MB",
+		"mfg_date": "2025-06-22",
+		"quantity_units": 1400,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0146",
+		"product_id": "P-112",
+		"site_id": "MB",
+		"mfg_date": "2025-02-10",
+		"quantity_units": 1550,
+		"status": "hold"
+	},
+	{
+		"id": "B-25-0147",
+		"product_id": "P-112",
+		"site_id": "MB",
+		"mfg_date": "2025-08-22",
+		"quantity_units": 1250,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0148",
+		"product_id": "P-112",
+		"site_id": "MB",
+		"mfg_date": "2025-01-09",
+		"quantity_units": 1050,
+		"status": "hold"
+	},
+	{
+		"id": "B-25-0149",
+		"product_id": "P-112",
+		"site_id": "MB",
+		"mfg_date": "2025-05-19",
+		"quantity_units": 200,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0150",
+		"product_id": "P-112",
+		"site_id": "MB",
+		"mfg_date": "2025-10-31",
+		"quantity_units": 600,
+		"status": "rejected"
+	},
+	{
+		"id": "B-25-0151",
+		"product_id": "P-112",
+		"site_id": "MB",
+		"mfg_date": "2025-01-08",
+		"quantity_units": 850,
+		"status": "released"
+	},
+	{
+		"id": "B-25-0152",
+		"product_id": "P-112",
+		"site_id": "MB",
+		"mfg_date": "2025-05-19",
+		"quantity_units": 200,
+		"status": "released"
+	}
+]
