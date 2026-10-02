@@ -54,7 +54,8 @@ class LLMGenerator:
         "Put the source number in square brackets after every sentence, for example [2]. "
         "If two sources give different values for the same thing, use the one marked current. "
         f"If the sources do not contain the answer, reply with exactly {INSUFFICIENT} and nothing else. "
-        "Do not use outside knowledge. Be brief."
+        "Do not use outside knowledge. Answer in one or two complete sentences that say what the value or fact refers to, "
+        "not a bare number or name."
     )
 
     def __init__(self, llm: LLM):

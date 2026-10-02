@@ -166,7 +166,7 @@ class RagService:
             while table in tables:
                 table += "_2"
             tables[table] = rows
-            files.append({"name": name, "kind": "data", "detail": f"{len(rows)} rows, table '{table}'"})
+            files.append({"name": name, "kind": "data", "detail": f"{len(rows)} row{'' if len(rows) == 1 else 's'} of data"})
             new_chunks: list[Chunk] = []
         else:
             new_chunks = chunk_text(name, _extract_text(name, data), groups)
@@ -175,7 +175,7 @@ class RagService:
             taken = {c.id for c in chunks}
             if any(c.id in taken for c in new_chunks):
                 raise ServiceError(409, f"A file with the same name as {name} is already uploaded.")
-            files.append({"name": name, "kind": "document", "detail": f"{sum(1 for c in new_chunks if not c.is_table_row)} passages"})
+            files.append({"name": name, "kind": "document", "detail": (lambda n: f"{n} passage{'' if n == 1 else 's'}")(sum(1 for c in new_chunks if not c.is_table_row))})
         if len(chunks) + len(new_chunks) > MAX_CHUNKS:
             raise ServiceError(413, "That would exceed the workspace size limit.")
 

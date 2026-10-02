@@ -180,7 +180,8 @@ class StructuredPipeline:
     )
 
     PHRASE = (
-        "Answer the question in one short sentence using only the query result. "
+        "Answer the question in one complete sentence that restates what was asked, using only the query result. "
+        "For example, for 'How many orders are open?' with result 7, write 'There are 7 open orders.' "
         "Use the figures exactly as given. Do not add any other number, name or explanation."
     )
 
