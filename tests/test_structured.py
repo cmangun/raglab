@@ -109,6 +109,9 @@ def test_unrestricted_queries_still_work_for_everyone(db):
     g = SqlGuard(db.tables(), restricted_columns=RESTRICTED)
     g.check("SELECT name, shelf_life_months FROM product", QUALITY_GROUPS)
     g.check("SELECT * FROM batch", QUALITY_GROUPS)
+    # COUNT(*) over a table with a restricted column reads no column and must be allowed.
+    g.check("SELECT COUNT(*) FROM batch b JOIN product p ON b.product_id = p.id WHERE p.name = 'Thyroid Marker Assay Kit'", QUALITY_GROUPS)
+    g.check("SELECT count(*) FROM product", QUALITY_GROUPS)
 
 
 def test_hidden_column_is_left_out_of_the_schema_shown_to_the_model(db):

@@ -83,7 +83,8 @@ class SqlGuard:
         used = {t.name.lower() for t in tree.find_all(exp.Table)} & set(hidden)
         if used:
             # Any star could expand to a hidden column, so it is refused on these tables.
-            if any(True for _ in tree.find_all(exp.Star)):
+            # COUNT(*) reads no column, so it is not a star in this sense.
+            if any(not isinstance(star.parent, exp.Count) for star in tree.find_all(exp.Star)):
                 raise SqlAccessDenied("SELECT * is not allowed on a table with restricted columns")
             blocked = set().union(*(hidden[t] for t in used))
             for col in tree.find_all(exp.Column):
