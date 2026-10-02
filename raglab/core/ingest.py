@@ -93,3 +93,60 @@ def build_chunks(folder: str | Path, **kw) -> list[Chunk]:
 
 def load_tables(folder: str | Path) -> dict[str, list[dict]]:
     return {p.stem: json.loads(p.read_text(encoding="utf-8")) for p in sorted(Path(folder).glob("*.json"))}
+
+
+# ------------------------------------------------------------ uploaded files
+
+def _windows(text: str, size: int = 1200) -> list[str]:
+    """Pack paragraphs into passages of roughly `size` characters, never splitting a paragraph unless it is longer than that."""
+    out: list[str] = []
+    cur = ""
+    for para in [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()]:
+        while len(para) > size * 1.5:
+            cut = para.rfind(". ", 0, size) + 1 or size
+            out.append((cur + "\n\n" + para[:cut]).strip() if cur else para[:cut].strip())
+            cur, para = "", para[cut:].strip()
+        if cur and len(cur) + len(para) > size:
+            out.append(cur)
+            cur = para
+        else:
+            cur = f"{cur}\n\n{para}" if cur else para
+    if cur:
+        out.append(cur)
+    return out
+
+
+def chunk_text(name: str, text: str, groups: frozenset[str], *, size: int = 1200) -> list[Chunk]:
+    """Chunk an uploaded file that has no front matter.
+
+    Markdown headings start a new section; within a section, paragraphs are
+    packed into passages. Tables also yield one chunk per row, as for the corpus.
+    """
+    doc_id = slug(name.rsplit(".", 1)[0]) or "document"
+    sections: list[tuple[str, str]] = []
+    heading, buf = "", []
+    for line in text.replace("\r\n", "\n").split("\n"):
+        m = re.match(r"^#{1,6}\s+(.*)$", line)
+        if m:
+            if "".join(buf).strip():
+                sections.append((heading, "\n".join(buf)))
+            heading, buf = m.group(1).strip(), []
+        else:
+            buf.append(line)
+    if "".join(buf).strip():
+        sections.append((heading, "\n".join(buf)))
+
+    chunks: list[Chunk] = []
+    n = 0
+    for heading, body in sections:
+        for part in _windows(body, size):
+            n += 1
+            section = heading or f"Part {n}"
+            ref = f"{doc_id}#{slug(heading) + '-' if heading else ''}{n}"
+            common = dict(document_id=doc_id, ref=ref, groups=groups, title=name, section=section, doc_type="upload", status="current")
+            context = f"{name}. Section: {section}." if heading else f"{name}."
+            chunks.append(Chunk(id=ref, text=part, context=context, **common))
+            for i, row in enumerate(_table_rows(part)):
+                row_text = "; ".join(f"{k}: {v}" for k, v in row.items())
+                chunks.append(Chunk(id=f"{ref}@row{i + 1}", text=row_text, context=context, is_table_row=True, metadata={"row": row}, **common))
+    return chunks
