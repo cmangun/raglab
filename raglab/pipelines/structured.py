@@ -179,9 +179,14 @@ class StructuredPipeline:
         "Dates are ISO strings (YYYY-MM-DD). Never modify data.\n\nTables:\n{schema}\n\n{notes}"
     )
 
+    PHRASE = (
+        "Answer the question in one short sentence using only the query result. "
+        "Use the figures exactly as given. Do not add any other number, name or explanation."
+    )
+
     def __init__(self, llm: LLM, db: SqlDatabase, verifier: Verifier, notes: str = "", max_rows: int = 200,
-                 restricted_columns: dict[str, frozenset[str]] | None = None, comp: Components | None = None):
-        self.llm, self.db, self.verifier, self.notes = llm, db, verifier, notes
+                 restricted_columns: dict[str, frozenset[str]] | None = None, comp: Components | None = None, phrase: bool = False):
+        self.llm, self.db, self.verifier, self.notes, self.phrase = llm, db, verifier, notes, phrase
         self.guard = SqlGuard(db.tables(), max_rows=max_rows, dialect=db.dialect, restricted_columns=restricted_columns or {})
         # With components, a question the tables cannot answer is checked against the
         # document store, so "restricted" and "not available" are told apart.
@@ -229,9 +234,19 @@ class StructuredPipeline:
         if not rows:
             return self._no_answer(question, principal, trace, usage, refs)
         rendered = render_rows(columns, rows)
-        text = f"{rendered} [1]" if "\n" not in rendered else f"{rendered}\n[1]"
+        raw = f"{rendered} [1]" if "\n" not in rendered else f"{rendered}\n[1]"
         # The verifier sees the rows as the evidence: every figure in the answer must be in them.
-        evidence = Chunk(id="sql-result", document_id="sql", ref=refs[0] if refs else "table:?", text=rendered, groups=principal.groups, title="SQL result", section=safe)
+        evidence = Chunk(id="sql-result", document_id="sql", ref=refs[0] if refs else "table:?", text=f"{question}\n{rendered}", groups=principal.groups, title="SQL result", section=safe)
+        text = raw
+        if self.phrase:
+            # Put the result in a sentence. If the wording adds a figure the rows do not contain, keep the raw result.
+            r = self.llm.complete(self.PHRASE, f"Question: {question}\nQuery result:\n{rendered}", max_tokens=120)
+            usage.add(r.usage)
+            sentence = r.text.strip().replace("[1]", "").strip()
+            candidate = f"{sentence.rstrip('.')}. [1]" if sentence else raw
+            ok = self.verifier.verify(candidate, [Hit(evidence, 1.0, "sql")]).supported
+            trace.event("phrase", {"model": self.llm.name, "kept": ok})
+            text = candidate if ok else raw
         check = self.verifier.verify(text, [Hit(evidence, 1.0, "sql")])
         usage.add(check.usage)
         trace.event("verify", {"verifier": self.verifier.name, "claims": check.claims, "unsupported": len(check.unsupported), "supported": check.supported})

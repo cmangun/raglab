@@ -127,3 +127,21 @@ def test_price_question_is_access_denied_not_answered(db):
     from conftest import COMMERCIAL
     ok = run_pipeline(p, "What is the list price of the Hepatic Enzyme Reagent Kit?", COMMERCIAL, TraceWriter("r", "sql"))
     assert ok.verdict == Verdict.ANSWERED
+
+
+def test_phrased_answer_is_kept_only_when_its_figures_match_the_rows(db):
+    hold = sum(1 for b in TABLES["batch"] if b["status"] == "hold")
+
+    def good(system, user):
+        return "SELECT count(*) FROM batch WHERE status = 'hold'" if "SELECT statement" in system else f"There are {hold} batches on hold."
+
+    p = StructuredPipeline(ScriptedLLM(good), db, LexicalVerifier(), phrase=True)
+    ans = run_pipeline(p, "How many batches currently have a status of hold?", QUALITY, TraceWriter("r", "sql"))
+    assert ans.verdict == Verdict.ANSWERED and ans.text == f"There are {hold} batches on hold. [1]"
+
+    def bad(system, user):
+        return "SELECT count(*) FROM batch WHERE status = 'hold'" if "SELECT statement" in system else "There are 999 batches on hold."
+
+    p2 = StructuredPipeline(ScriptedLLM(bad), db, LexicalVerifier(), phrase=True)
+    ans2 = run_pipeline(p2, "How many batches currently have a status of hold?", QUALITY, TraceWriter("r", "sql"))
+    assert "999" not in ans2.text and str(hold) in ans2.text

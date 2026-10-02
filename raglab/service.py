@@ -118,6 +118,8 @@ class RagService:
         self.llm = llm or (OpenAICompatLLM(api_key, model, base_url) if (api_key and model) else None)
         self.embedder = embedder or (OpenAICompatEmbedder(api_key, embed_model, base_url) if (api_key and embed_model) else HashingEmbedder())
         lab = build_lab(corpus, api_key=api_key, model=model, embed_model=embed_model, base_url=base_url, llm=self.llm)
+        if "sql" in lab.pipelines:
+            lab.pipelines["sql"].phrase = True  # live answers read as sentences; evaluation runs keep the raw result
         self.sample = Workspace("sample", lab.comp, lab.pipelines, chunks=lab.chunks, tables=lab.tables)
         self.sample_groups = sorted({g for c in lab.chunks for g in c.groups})
         self.workspaces: dict[str, Workspace] = {}
@@ -200,7 +202,7 @@ class RagService:
         if self.llm:
             structured = None
             if tables:
-                structured = StructuredPipeline(self.llm, SqliteDatabase(tables), LexicalVerifier(), notes="Column names are lower-case with underscores.", comp=comp if chunks else None)
+                structured = StructuredPipeline(self.llm, SqliteDatabase(tables), LexicalVerifier(), notes="Column names are lower-case with underscores.", comp=comp if chunks else None, phrase=True)
                 pipelines["sql"] = structured
             if chunks:
                 pipelines["agentic"] = AgenticPipeline(comp, self.llm, structured=structured, graph=graph)
