@@ -9,7 +9,7 @@ database connection is read-only as a second line of defence.
 from __future__ import annotations
 
 import sqlite3
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Protocol
 
 import sqlglot
@@ -19,7 +19,7 @@ from ..core.llm import LLM
 from ..core.trace import TraceWriter
 from ..core.types import Answer, Chunk, Citation, Hit, Principal, Usage, Verdict
 from ..core.verify import Verifier
-from .base import MSG_INSUFFICIENT
+from .base import MSG_DENIED, MSG_INSUFFICIENT, Components, embed_query, empty_verdict
 
 NO_SQL = "NO_SQL"
 
@@ -34,13 +34,28 @@ class SqlRejected(Exception):
     """The generated SQL failed the guard. Carries the reason; the SQL is never run."""
 
 
+class SqlAccessDenied(SqlRejected):
+    """The query is well formed but reads a column the asker may not see."""
+
+
 @dataclass
 class SqlGuard:
     allowed_tables: frozenset[str]
     max_rows: int = 200
     dialect: str = "sqlite"
+    # "table.column" -> groups allowed to read it. Columns not listed are open to everyone.
+    restricted_columns: dict[str, frozenset[str]] = field(default_factory=dict)
 
-    def check(self, sql: str) -> str:
+    def hidden_columns(self, groups: frozenset[str]) -> dict[str, set[str]]:
+        """table -> columns this set of groups may not read."""
+        out: dict[str, set[str]] = {}
+        for key, allowed in self.restricted_columns.items():
+            if not (allowed & groups):
+                table, _, column = key.partition(".")
+                out.setdefault(table.lower(), set()).add(column.lower())
+        return out
+
+    def check(self, sql: str, groups: frozenset[str] = frozenset()) -> str:
         """Return a normalised, row-limited query, or raise SqlRejected."""
         try:
             statements = [s for s in sqlglot.parse(sql.strip().rstrip(";"), read=self.dialect) if s is not None]
@@ -64,6 +79,16 @@ class SqlGuard:
             name = (fn.name if isinstance(fn, exp.Anonymous) else fn.sql_name()).lower()
             if isinstance(fn, exp.Anonymous) and name not in _SAFE_FUNCTIONS:
                 raise SqlRejected(f"function '{name}' is not on the allow-list")
+        hidden = self.hidden_columns(groups)
+        used = {t.name.lower() for t in tree.find_all(exp.Table)} & set(hidden)
+        if used:
+            # Any star could expand to a hidden column, so it is refused on these tables.
+            if any(True for _ in tree.find_all(exp.Star)):
+                raise SqlAccessDenied("SELECT * is not allowed on a table with restricted columns")
+            blocked = set().union(*(hidden[t] for t in used))
+            for col in tree.find_all(exp.Column):
+                if col.name.lower() in blocked:
+                    raise SqlAccessDenied("the query reads a restricted column")
         limit = tree.args.get("limit")
         current = None
         if limit is not None:
@@ -80,7 +105,7 @@ class SqlDatabase(Protocol):
     name: str
     dialect: str
 
-    def schema(self) -> str: ...
+    def schema(self, hidden: dict[str, set[str]] | None = None) -> str: ...
 
     def tables(self) -> frozenset[str]: ...
 
@@ -95,14 +120,14 @@ class SqliteDatabase:
 
     def __init__(self, tables: dict[str, list[dict]], max_steps: int = 2_000_000):
         self._conn = sqlite3.connect(":memory:", check_same_thread=False)
-        self._schema: list[str] = []
+        self._schema: list[tuple[str, list[tuple[str, str]]]] = []
         for name, rows in tables.items():
             cols = list(rows[0].keys())
             types = {c: ("INTEGER" if all(isinstance(r[c], int) and not isinstance(r[c], bool) for r in rows if r[c] is not None)
                          else "REAL" if all(isinstance(r[c], (int, float)) for r in rows if r[c] is not None) else "TEXT") for c in cols}
             self._conn.execute(f"CREATE TABLE {name} ({', '.join(f'{c} {types[c]}' for c in cols)})")
             self._conn.executemany(f"INSERT INTO {name} VALUES ({', '.join('?' for _ in cols)})", [tuple(r[c] for c in cols) for r in rows])
-            self._schema.append(f"{name}({', '.join(f'{c} {types[c]}' for c in cols)})")
+            self._schema.append((name, [(c, types[c]) for c in cols]))
         self._names = frozenset(tables)
         self._conn.commit()
         self._conn.execute("PRAGMA query_only = ON")
@@ -116,8 +141,12 @@ class SqliteDatabase:
 
         self._conn.set_progress_handler(tick, 1000)
 
-    def schema(self) -> str:
-        return "\n".join(self._schema)
+    def schema(self, hidden: dict[str, set[str]] | None = None) -> str:
+        """Table definitions, leaving out columns the asker may not read."""
+        hidden = hidden or {}
+        return "\n".join(
+            f"{name}({', '.join(f'{c} {t}' for c, t in cols if c.lower() not in hidden.get(name.lower(), ()))})" for name, cols in self._schema
+        )
 
     def tables(self) -> frozenset[str]:
         return self._names
@@ -149,13 +178,26 @@ class StructuredPipeline:
         "Dates are ISO strings (YYYY-MM-DD). Never modify data.\n\nTables:\n{schema}\n\n{notes}"
     )
 
-    def __init__(self, llm: LLM, db: SqlDatabase, verifier: Verifier, notes: str = "", max_rows: int = 200):
+    def __init__(self, llm: LLM, db: SqlDatabase, verifier: Verifier, notes: str = "", max_rows: int = 200,
+                 restricted_columns: dict[str, frozenset[str]] | None = None, comp: Components | None = None):
         self.llm, self.db, self.verifier, self.notes = llm, db, verifier, notes
-        self.guard = SqlGuard(db.tables(), max_rows=max_rows, dialect=db.dialect)
+        self.guard = SqlGuard(db.tables(), max_rows=max_rows, dialect=db.dialect, restricted_columns=restricted_columns or {})
+        # With components, a question the tables cannot answer is checked against the
+        # document store, so "restricted" and "not available" are told apart.
+        self.comp = comp
 
-    def query(self, question: str, trace: TraceWriter, usage: Usage) -> tuple[str, list[str], list[tuple]] | None:
+    def _no_answer(self, question: str, principal: Principal, trace: TraceWriter, usage: Usage, refs: list[str] | None = None) -> Answer:
+        if self.comp is None:
+            return Answer(MSG_INSUFFICIENT, Verdict.INSUFFICIENT_EVIDENCE, retrieved_refs=refs or [], usage=usage)
+        ans = empty_verdict(question, embed_query(self.comp, question), principal, self.comp, trace)
+        ans.retrieved_refs, ans.usage = refs or [], usage
+        return ans
+
+    def query(self, question: str, trace: TraceWriter, usage: Usage, principal: Principal | None = None) -> tuple[str, list[str], list[tuple]] | None:
         """Generate, guard and run. Returns None when the model says the tables cannot answer."""
-        r = self.llm.complete(self.SYSTEM.format(dialect=self.db.dialect, schema=self.db.schema(), notes=self.notes), question, max_tokens=400)
+        groups = principal.groups if principal else frozenset()
+        schema = self.db.schema(self.guard.hidden_columns(groups))
+        r = self.llm.complete(self.SYSTEM.format(dialect=self.db.dialect, schema=schema, notes=self.notes), question, max_tokens=400)
         usage.add(r.usage)
         raw = r.text.strip().removeprefix("```sql").removeprefix("```").removesuffix("```").strip()
         if raw.upper().startswith(NO_SQL) or not raw:
@@ -163,7 +205,7 @@ class StructuredPipeline:
             return None
         trace.event("sql_generate", {"model": self.llm.name, "sql": raw})
         try:
-            safe = self.guard.check(raw)
+            safe = self.guard.check(raw, groups)
         except SqlRejected as e:
             trace.event("sql_guard", {"allowed": False, "reason": str(e)})
             raise
@@ -174,14 +216,17 @@ class StructuredPipeline:
 
     def run(self, question: str, principal: Principal, trace: TraceWriter) -> Answer:
         usage = Usage()
-        out = self.query(question, trace, usage)  # SqlRejected and database errors surface as execution_failed
+        try:
+            out = self.query(question, trace, usage, principal)  # other rejections and database errors surface as execution_failed
+        except SqlAccessDenied:
+            return Answer(MSG_DENIED, Verdict.ACCESS_DENIED, usage=usage)
         if out is None:
-            return Answer(MSG_INSUFFICIENT, Verdict.INSUFFICIENT_EVIDENCE, usage=usage)
+            return self._no_answer(question, principal, trace, usage)
         safe, columns, rows = out
         tables = sorted({t.name.lower() for t in sqlglot.parse_one(safe, read=self.db.dialect).find_all(exp.Table)} & self.db.tables())
         refs = [f"table:{t}" for t in tables]
         if not rows:
-            return Answer(MSG_INSUFFICIENT, Verdict.INSUFFICIENT_EVIDENCE, retrieved_refs=refs, usage=usage)
+            return self._no_answer(question, principal, trace, usage, refs)
         rendered = render_rows(columns, rows)
         text = f"{rendered} [1]" if "\n" not in rendered else f"{rendered}\n[1]"
         # The verifier sees the rows as the evidence: every figure in the answer must be in them.

@@ -12,6 +12,9 @@ from __future__ import annotations
 import json
 import re
 
+import sqlglot
+from sqlglot import exp
+
 from ..core.llm import LLM
 from ..core.text import content_tokens
 from ..core.trace import TraceWriter, visible_hits
@@ -65,6 +68,7 @@ class AgenticPipeline:
         usage = Usage()
         pool: dict[str, Hit] = {}
         sql_note: str | None = None
+        sql_tables: list[str] = []
         transcript = f"Question: {question}\n"
         queries: list[str] = []
         bad = 0
@@ -94,10 +98,11 @@ class AgenticPipeline:
                 hits = self.graph.walk(seeds, principal, hops=1)[0][: self.comp.k] if seeds else []
             elif action == "sql" and self.structured and arg:
                 try:
-                    out = self.structured.query(arg, trace, usage)
+                    out = self.structured.query(arg, trace, usage, principal)
                     observation = "The database cannot answer that." if out is None else f"Query result:\n{render_rows(out[1], out[2])}"
                     if out is not None:
                         sql_note = observation
+                        sql_tables = sorted({t.name.lower() for t in sqlglot.parse_one(out[0], read=self.structured.db.dialect).find_all(exp.Table)} & self.structured.db.tables())
                 except SqlRejected as e:
                     observation = f"The query was rejected: {e}."
             else:
@@ -122,7 +127,7 @@ class AgenticPipeline:
         if sql_note:
             from ..core.types import Chunk
 
-            evidence.insert(0, Hit(Chunk(id="sql-result", document_id="sql", ref="table:result", text=sql_note, groups=principal.groups, title="Database query", section="result"), 1.0, "sql"))
+            evidence.insert(0, Hit(Chunk(id="sql-result", document_id="sql", ref=f"table:{sql_tables[0]}" if sql_tables else "table:result", text=sql_note, groups=principal.groups, title="Database query", section="result"), 1.0, "sql"))
         ans = answer_from_hits(question, embed_query(self.comp, question), principal, evidence, self.comp, trace)
         ans.usage.add(usage)
         return ans

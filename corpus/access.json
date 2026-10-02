@@ -1,0 +1,8 @@
+{
+	"_note": "Columns of the relational tables that only some groups may read. Everything not listed is open to all groups.",
+	"restricted_columns": {
+		"product.list_price_usd": [
+			"commercial"
+		]
+	}
+}

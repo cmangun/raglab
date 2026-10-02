@@ -91,7 +91,10 @@ def build_lab(corpus: str | Path = "corpus", *, dsn: str | None = None, api_key:
     }
     skipped: dict[str, str] = {}
     if llm:
-        structured = StructuredPipeline(llm, SqliteDatabase(tables), LexicalVerifier(), notes=SQL_NOTES)
+        restricted = {}
+        if (corpus / "access.json").exists():
+            restricted = {k: frozenset(v) for k, v in json.loads((corpus / "access.json").read_text())["restricted_columns"].items()}
+        structured = StructuredPipeline(llm, SqliteDatabase(tables), LexicalVerifier(), notes=SQL_NOTES, restricted_columns=restricted, comp=comp)
         pipelines["sql"] = structured
         pipelines["agentic"] = AgenticPipeline(comp, llm, structured=structured, graph=graph)
     else:

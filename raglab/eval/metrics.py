@@ -84,7 +84,7 @@ class Score:
     leak_detail: str
     verifier_changed: bool
     execution_failed: bool
-    coincidental: bool = False  # key facts present but none of the supporting evidence retrieved
+    coincidental: bool = False  # right figure for a data question, but no table was queried
 
     def to_dict(self) -> dict:
         return self.__dict__.copy()
@@ -126,9 +126,10 @@ def score_answer(q: Question, answer: Answer, public_trace: dict, acl: dict[str,
     if expects_answer and wanted:
         got = set(answer.retrieved_refs)
         recall = sum(1 for r in wanted if r in got) / len(wanted)
-    coincidental = grade == "correct" and recall == 0.0
+    # A count or total must come from the data. If the question's evidence is in the
+    # tables and no table was queried, the right figure is luck, not retrieval.
+    coincidental = grade == "correct" and bool(q.table_refs) and not any(r.startswith("table:") for r in answer.retrieved_refs)
     if coincidental:
-        # The right words with none of the right evidence is luck, not retrieval.
         grade = "wrong"
     leak = find_leak(q, answer, public_trace, acl)
     return Score(

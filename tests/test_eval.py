@@ -97,3 +97,7 @@ def test_right_figure_from_wrong_evidence_is_not_correct():
     assert s.grade == "wrong" and s.coincidental
     grounded = Answer(f"{int(q.expected_value)} [1]", Verdict.ANSWERED, retrieved_refs=["table:batch"])
     assert score_answer(q, grounded, EMPTY, ACL, KeyFactJudge()).grade == "correct"
+    # A document question answered from other valid evidence is not penalised.
+    doc_q = BY_ID["Q-33"]
+    other = Answer("3 business days. [1]", Verdict.ANSWERED, retrieved_refs=["CC-01#change-description"])
+    assert score_answer(doc_q, other, EMPTY, ACL, KeyFactJudge()).grade == "correct"

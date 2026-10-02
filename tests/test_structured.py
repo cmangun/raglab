@@ -79,3 +79,48 @@ def test_malicious_sql_is_an_execution_failure_not_a_decline(db):
     assert ans.verdict == Verdict.EXECUTION_FAILED and ans.error == "SqlRejected"
     assert any(e["event_type"] == "sql_guard" and e["payload"]["allowed"] is False for e in t.events)
     assert len(db.execute("SELECT id FROM batch LIMIT 200")[1]) == 152  # nothing was deleted
+
+
+# ------------------------------------------------------- column-level access
+
+RESTRICTED = {"product.list_price_usd": frozenset({"commercial"})}
+COMMERCIAL_GROUPS, QUALITY_GROUPS = frozenset({"commercial"}), frozenset({"quality"})
+
+
+@pytest.mark.parametrize("sql", [
+    "SELECT list_price_usd FROM product WHERE id = 'P-103'",
+    "SELECT * FROM product",
+    "SELECT p.* FROM product p",
+    "SELECT name FROM product ORDER BY list_price_usd DESC",
+    "SELECT name FROM product WHERE list_price_usd > 500",
+    "SELECT max(p.list_price_usd) FROM batch b JOIN product p ON p.id = b.product_id",
+    "WITH x AS (SELECT * FROM product) SELECT * FROM x",
+])
+def test_restricted_column_is_denied_to_other_groups(sql, db):
+    from raglab.pipelines.structured import SqlAccessDenied
+
+    g = SqlGuard(db.tables(), restricted_columns=RESTRICTED)
+    with pytest.raises(SqlAccessDenied):
+        g.check(sql, QUALITY_GROUPS)
+    g.check(sql, COMMERCIAL_GROUPS)  # the owning group may run the same query
+
+
+def test_unrestricted_queries_still_work_for_everyone(db):
+    g = SqlGuard(db.tables(), restricted_columns=RESTRICTED)
+    g.check("SELECT name, shelf_life_months FROM product", QUALITY_GROUPS)
+    g.check("SELECT * FROM batch", QUALITY_GROUPS)
+
+
+def test_hidden_column_is_left_out_of_the_schema_shown_to_the_model(db):
+    g = SqlGuard(db.tables(), restricted_columns=RESTRICTED)
+    assert "list_price_usd" not in db.schema(g.hidden_columns(QUALITY_GROUPS))
+    assert "list_price_usd" in db.schema(g.hidden_columns(COMMERCIAL_GROUPS))
+
+
+def test_price_question_is_access_denied_not_answered(db):
+    p = StructuredPipeline(ScriptedLLM(lambda s, u: "SELECT list_price_usd FROM product WHERE id = 'P-103'"), db, LexicalVerifier(), restricted_columns=RESTRICTED)
+    ans = run_pipeline(p, "What is the list price of the Hepatic Enzyme Reagent Kit?", QUALITY, TraceWriter("r", "sql"))
+    assert ans.verdict == Verdict.ACCESS_DENIED and "915" not in ans.text
+    from conftest import COMMERCIAL
+    ok = run_pipeline(p, "What is the list price of the Hepatic Enzyme Reagent Kit?", COMMERCIAL, TraceWriter("r", "sql"))
+    assert ok.verdict == Verdict.ANSWERED
