@@ -48,8 +48,9 @@ class MemoryStore:
 
     # ------------------------------------------------------------------ search
     def _ranked(self, scores) -> list[int]:
-        # Best first; ties break on chunk id so the order matches the Postgres store.
-        return sorted(range(len(scores)), key=lambda i: (-scores[i], self._chunks[i].id))
+        # Best first. Scores are rounded so float noise between this store and Postgres
+        # cannot reorder near-equal chunks; those break on chunk id instead.
+        return sorted(range(len(scores)), key=lambda i: (-round(float(scores[i]), 5), self._chunks[i].id))
 
     def vector_search(self, embedding, k, principal: Principal, *, filter_mode: FilterMode = "pre", current_only=False, table_rows=False) -> SearchResult:
         if self._emb is None:
