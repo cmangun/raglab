@@ -38,7 +38,7 @@ against: vector search only, access filter applied after ranking.
 
 ```bash
 pip install -e ".[dev]"
-pytest -q                 # 65 tests, in-memory and a real Postgres with pgvector
+pytest -q                 # 85 tests, in-memory and a real Postgres with pgvector
 raglab sweep              # try to make every retrieval path leak
 raglab eval               # run the golden set, print the matrix and the gate
 raglab ask "What does SOP-013 give as the calibration interval for balances and pipettes?" --group commercial
@@ -58,11 +58,13 @@ models.
 
 ## What has been verified, and what has not
 
-Verified by running it:
+Verified offline, by the test suite:
 
-- 65 tests pass, with the store tests run against both the in-memory store and
-  Postgres 16 with pgvector.
-- The two stores return identical vector rankings.
+- 85 tests pass, with the store tests run against both the in-memory store and
+  Postgres 16 with pgvector. (The Postgres tests need `pgserver`; CI runs them
+  on Python 3.11.)
+- The two stores return identical vector rankings, including for chunks whose
+  scores tie.
 - The leakage sweep returns 0 leaks in about 6,500 returned chunks, on both
   stores, using the restricted documents' own text as the queries.
 - The SQL guard rejects 13 hostile statements, and the database refuses writes
@@ -72,19 +74,70 @@ Verified by running it:
 - Adding an exact-identifier index to the Postgres keyword search raised recall
   on cross-document questions from 0.53 to 0.94, matching BM25.
 
-Not yet verified, because it needs a provider key:
+Verified with real models, in three full evaluation runs over the 42 golden
+questions (answers and verification by GPT-5.4 mini, grading by Claude Haiku 4.5,
+embeddings by text-embedding-3-small, in-memory store; about $0.20 a run):
 
-- `OpenAICompatLLM` and `OpenAICompatEmbedder` against a live endpoint.
-- `LLMGenerator`, `LLMVerifier` and `LLMJudge` output quality.
-- The text-to-SQL and agentic pipelines with a real model (their control flow is
-  tested with a scripted model).
-- Page-image reading with a real vision model and a real renderer.
-- Any comparison between pipelines. Offline, the embedder is lexical, so vector
-  and keyword search behave alike and the baseline looks as good as hybrid
-  retrieval. No conclusion about which pattern is better should be drawn until
-  a run with real embeddings exists.
+| Run | Gate | What it showed |
+|---|---|---|
+| `model-1` | rejected | A real leak: the SQL pipeline answered a restricted price from the product table (Q-40) and failed all three forbidden questions. |
+| `model-2` | rejected | The leak was fixed with column-level access, but the fix over-blocked aggregate queries and SQL dropped to 5 of 6 on numeric questions. |
+| `model-3` | pending | Every automated condition passes: 0 leaks, all refusals correct, hybrid 12 of 12 on lookup and version questions, SQL 6 of 6 on numeric. It waits only on a person agreeing with at least 18 of 20 sampled judge grades. |
+
+Results from `model-3`, correct answers per question type:
+
+| Pipeline | Lookup | Versions | Multi-hop | Numeric | Relationships | Tables | Out of scope | Forbidden | Cost | Median time |
+|---|---|---|---|---|---|---|---|---|---|---|
+| naive | 8/8 | 4/4 | 1/6 | 0/6 | 3/6 | 6/6 | 3/3 | 3/3 | $0.025 | 1.7 s |
+| hybrid | 8/8 | 4/4 | 2/6 | 0/6 | 3/6 | 6/6 | 3/3 | 3/3 | $0.028 | 1.7 s |
+| graph | 8/8 | 4/4 | 1/6 | 0/6 | 3/6 | 6/6 | 3/3 | 3/3 | $0.028 | 1.8 s |
+| multimodal | 8/8 | 4/4 | 1/6 | 0/6 | 3/6 | 6/6 | 3/3 | 3/3 | $0.025 | 1.6 s |
+| sql | 0/8 | 0/4 | 0/6 | 6/6 | 3/6 | 6/6 | 3/3 | 3/3 | $0.014 | 1.0 s |
+| agentic | 8/8 | 4/4 | 4/6 | 5/6 | 3/6 | 6/6 | 3/3 | 3/3 | $0.079 | 4.2 s |
+
+What the runs say:
+
+- The agent wins multi-hop questions (4 of 6) by planning several steps, at about
+  three times the cost and latency.
+- SQL wins numeric questions (6 of 6); no document pipeline answers any of them.
+- Lookup, version and table questions are tied across the document pipelines, so
+  the corpus is too easy there to separate them. Harder questions are the next
+  step.
+- No pipeline gets more than 3 of 6 relationship questions right, graph
+  retrieval included.
+- Runs are not deterministic: SQL scored 6, then 5, then 6 of 6 across runs for
+  reasons unrelated to the change being tested. Compare runs; do not trust one.
+
+Not yet verified:
+
+- Page-image reading with a real vision model and a real page renderer.
+- A full real-model run on the Postgres store (the runs above used the in-memory
+  store; the stores' rankings are tested to match).
+- The human check that would move `model-3` from pending to accepted.
 
 The offline run is rejected by the gate. That is the expected result.
+
+## The live service
+
+`raglab/server.py` puts the pipelines behind a small HTTP API, used by a private
+portfolio demo:
+
+- `GET /describe` lists the pipelines and what each workspace can run.
+- `POST /workspaces/{id}/files` adds a file (`.txt`, `.md`, `.pdf` or `.csv`, up
+  to 2 MB, 20 per workspace). CSV files become tables the SQL pipeline can query.
+- `DELETE /workspaces/{id}` clears a workspace.
+- `POST /ask` runs a question through the chosen pipelines on the sample corpus or
+  a workspace and returns each verdict, answer, sources, trace, time and cost.
+
+Every route except the health check needs a bearer token (`RAGLAB_TOKEN`).
+Uploaded files are held in memory per workspace and are lost on restart; their
+text is sent to the configured model provider. The `Dockerfile` builds the
+service image.
+
+```bash
+pip install -e ".[server]"
+RAGLAB_TOKEN=change-me uvicorn raglab.server:app --factory --port 8080
+```
 
 ## The corpus
 
