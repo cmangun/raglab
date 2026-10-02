@@ -111,8 +111,10 @@ class PostgresStore:
         scope = self._scope(current_only, table_rows)
         if filter_mode == "pre":
             rows = self._conn.execute(
-                f"""SELECT {_COLUMNS}, 1 - (embedding <=> %s) AS score FROM {self._t}
-                    WHERE groups && %s{scope} ORDER BY embedding <=> %s LIMIT %s""",
+                f"""SELECT * FROM (
+                        SELECT {_COLUMNS}, 1 - (embedding <=> %s) AS score FROM {self._t}
+                        WHERE groups && %s{scope} ORDER BY embedding <=> %s LIMIT %s) t
+                    ORDER BY score DESC, id""",
                 (vec, groups, vec, k),
             ).fetchall()
             return SearchResult([Hit(self._chunk(r), float(r[-1]), "vector") for r in rows])
@@ -123,7 +125,7 @@ class PostgresStore:
                     SELECT {_COLUMNS}, 1 - (embedding <=> %s) AS score FROM {self._t}
                     WHERE true{scope} ORDER BY embedding <=> %s LIMIT %s)
                 SELECT *, (SELECT count(*) FROM top WHERE NOT (groups && %s)) AS removed
-                FROM top WHERE groups && %s ORDER BY score DESC""",
+                FROM top WHERE groups && %s ORDER BY score DESC, id""",
             (vec, vec, k, groups, groups),
         ).fetchall()
         if rows:

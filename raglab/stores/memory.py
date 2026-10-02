@@ -47,11 +47,15 @@ class MemoryStore:
         return True
 
     # ------------------------------------------------------------------ search
+    def _ranked(self, scores) -> list[int]:
+        # Best first; ties break on chunk id so the order matches the Postgres store.
+        return sorted(range(len(scores)), key=lambda i: (-scores[i], self._chunks[i].id))
+
     def vector_search(self, embedding, k, principal: Principal, *, filter_mode: FilterMode = "pre", current_only=False, table_rows=False) -> SearchResult:
         if self._emb is None:
             return SearchResult([])
         scores = self._emb @ np.asarray(embedding, dtype=np.float32)
-        order = [int(i) for i in np.argsort(-scores) if self._eligible(int(i), current_only, table_rows)]
+        order = [i for i in self._ranked(scores) if self._eligible(i, current_only, table_rows)]
         if filter_mode == "pre":
             visible = [i for i in order if self._chunks[i].visible_to(principal)][:k]
             return SearchResult([Hit(self._chunks[i], float(scores[i]), "vector") for i in visible])
@@ -80,9 +84,9 @@ class MemoryStore:
     def keyword_search(self, query, k, principal: Principal, *, current_only=False, table_rows=False) -> SearchResult:
         scores = self._bm25(query)
         order = [
-            int(i)
-            for i in np.argsort(-scores)
-            if scores[int(i)] > 0 and self._eligible(int(i), current_only, table_rows) and self._chunks[int(i)].visible_to(principal)
+            i
+            for i in self._ranked(scores)
+            if scores[i] > 0 and self._eligible(i, current_only, table_rows) and self._chunks[i].visible_to(principal)
         ][:k]
         return SearchResult([Hit(self._chunks[i], float(scores[i]), "keyword") for i in order])
 
